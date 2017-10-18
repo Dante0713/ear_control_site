@@ -1,6 +1,8 @@
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.shortcuts import render,HttpResponse
+from django.template.loader import get_template
+from datetime import datetime
 from ear_info.models import Earthquake
 from ear_info.serializers import EarthquakeSerializer
 from rest_framework import viewsets, status
@@ -10,7 +12,16 @@ from rest_framework.response import Response
 import json
 
 def EarthquakeList(request):
-	return render(request, 'show_all.html')
+	template = get_template('earthquake_list_page.html')
+	now = datetime.now
+	html = template.render(locals())
+	return HttpResponse(html)
+
+def WidgeList(request):
+	template = get_template('widge_page.html')
+	now = datetime.now
+	html = template.render(locals())
+	return HttpResponse(html)
 
 # Create your views here.
 class EarthquakeViewSet(viewsets.ModelViewSet):
