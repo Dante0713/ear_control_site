@@ -2,9 +2,19 @@
 <!DOCTYPE html>
     <html>
     <head>
+        <script type="text/javascript">
+        var before_loadtime = new Date().getTime();
+        window.onload = Pageloadtime;
+        function Pageloadtime() {
+            var aftr_loadtime = new Date().getTime();
+            // Time calculating in seconds
+            pgloadtime = (aftr_loadtime - before_loadtime) / 1000
+            document.getElementById("loadtime").innerHTML = "Pgae load time is <font color='red'><b>" + pgloadtime + "</b></font> Seconds";
+        }
+        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-table.css' %}"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <title>Earthquakes</title>
     </head>
     <body>
@@ -21,12 +31,12 @@
                 data-page-list="[10, 20, 50, 100, 200, 500, 1000]"
                 data-search="true" data-mobile-responsive="true" searchOnEnterKey="true"
                 data-show-refresh="true" data-show-columns="true"
-                data-show-toggle="true" data-page-size=20 data-unique-id="earthquake_id"
+                data-show-toggle="true" data-page-size=10 data-unique-id="earthquake_id"
                 data-striped="true"
                 >
                 <thead>
                     <tr>
-                        <th data-field="earthquake_id" data-align="center" data-sortable="true"> 資料編號 </th>
+                        <th data-field="earthquake_id" data-align="center" data-sortable="true"> 編號 </th>
                         <th data-field="earthquake_ear_id" data-align="center" data-sortable="true"> 地震編號 </th>
                         <th data-field="earthquake_s_year" data-align="center" data-sortable="true"> 年份 </th>
                         <th data-field="earthquake_ear_time" data-align="center" data-sortable="true"> 台灣時間 </th>
@@ -38,10 +48,14 @@
                     </tr>
                 </thead>
             </table>
+            <div>
+                <span id="loadtime"></span>
+            </div>
         </div>
+        
         <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-        <script src="{% static 'js/bootstrap-table.js' %}"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </body>
     </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #map {
+        height: 800px;
+        width: 100%;
+       }
+    </style>
+    <title> Google Maps </title>
+  </head>
+  <body>
+    <h3>Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var NanTo = {lat: 23.96, lng: 121.09};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: NanTo
+        });
+
+        var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h3 id="firstHeading" class="firstHeading">花蓮</h3>'+
+      '<div id="bodyContent">'+
+      '<p><b>花蓮</b></p>'+
+      '</div>'+
+      '</div>';
+		var infowindow = new google.maps.InfoWindow({
+			content: contentString
+        });	
+        var marker = new google.maps.Marker({
+          position: {lat: 23.84, lng: 121.45},
+          map: map
+        });
+		marker.addListener('click', function() {
+			infowindow.open(map, marker);
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkidRUw2dtUavw9aY_Vslle_Qqjgmxj_k&callback=initMap"
+    async defer></script>
+  </body>
+</html>

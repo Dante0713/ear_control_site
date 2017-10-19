@@ -23,12 +23,16 @@ def WidgeList(request):
 	html = template.render(locals())
 	return HttpResponse(html)
 
+def ShowMap(request):
+	template = get_template('show_map.html')
+	html = template.render(locals())
+	return HttpResponse(html)
+
 # Create your views here.
 class EarthquakeViewSet(viewsets.ModelViewSet):
 	queryset = Earthquake.objects.all()
 	serializer_class = EarthquakeSerializer
 	permission_classes = (IsAuthenticated,)
-
 
 def show_earthquake_in_table(request):
 	'''
@@ -45,7 +49,7 @@ def show_earthquake_in_table(request):
 		order = request.GET.get('order')	  # ascending or descending
 		if search:	#	判断是否有搜索字 id=search,ear_id=search,s_year=search,ear_time=search,ear_longitude=search,ear_latitude=search,ear_scale=search,ear_deep=search,ear_epicenter_pos=search
 			if '=' in search:
-				if '資料編號=' in search:
+				if '編號=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(id__contains=search1))
 				elif '地震編號=' in search:

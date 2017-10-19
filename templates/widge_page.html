@@ -1,115 +1,159 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Accordion - Sortable</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}"/>
-  <script src="{% static 'js/jquery.js' %}"></script>
-  <script src="{% static 'js/jquery-ui.js' %}"></script>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
-  <script>
-    $( function() {
-      $( "#accordion" )
-        .accordion({
-          header: "> div > h3"
-        })
-        .sortable({
-          axis: "y",
-          handle: "h3",
-          stop: function( event, ui ) {
-            // IE doesn't register the blur when sorting
-            // so trigger focusout handlers to remove .ui-state-focus
-            ui.item.children( "h3" ).triggerHandler( "focusout" );
-   
-            // Refresh accordion to handle new order
-            $( this ).accordion( "refresh" );
-          }
-        });
-    } );
-  </script>
-  <style>
-
-  </style>
-</head>
-<body>
-<div class="container-fluid">
-<div id="accordion" class="row">
-  <div class="group col-md-4">
-    <h3>Section 1</h3>
-    <div>
-      <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/widgets-set.css' %}"/>
+    <title>jQuery UI Accordion - Sortable</title>
+  </head>
+  <body>
+    <p class="accordion-expand-holder">
+      <a class="accordion-expand-all" href="#">Expand all</a>
+    </p>
+    <div id="accordion" class="ui-accordion ui-widget ui-helper-reset container">
+      <div class="row">
+      <div id="col_left" class="col-md-4">
+        <div class="widget">
+          <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+            <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+            Section 1-1
+          </h3>
+          <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+            <p>
+              Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+              ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+              amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+              odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+        </div>
+        <div class="widget">
+          <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+            <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+            Section 1-2
+          </h3>
+          <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+            <p>
+              Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+              ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+              amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+              odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+        </div>
+        <div class="widget">
+          <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+            <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+            Section 1-3
+          </h3>
+          <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+            <p>
+              Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+              ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+              amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+              odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="col_middle"  class="col-md-4">
+        <div class="widget">
+          <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+            <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+            Section 2-1
+          </h3>
+          <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+            <p>
+              Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+              ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+              amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+              odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+        </div>
+        <div class="widget">
+          <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+            <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+            Section 2-2
+          </h3>
+          <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+            <p>
+              Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+              ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+              amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+              odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+        </div>
+        <div class="widget">
+          <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+            <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+            Section 2-3
+          </h3>
+          <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+            <p>
+              Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+              ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+              amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+              odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="col_right"  class="col-md-4">
+        <div class="widget">
+          <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+            <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+            Section 3-1
+          </h3>
+          <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+            <p>
+              Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+              ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+              amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+              odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+        </div>
+        <div class="widget">
+          <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+            <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+            Section 3-2
+          </h3>
+          <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+            <p>
+              Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+              ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+              amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+              odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+        </div>
+        <div class="widget">
+          <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+            <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+            Section 3-3
+          </h3>
+          <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+            <p>
+              Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+              ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+              amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+              odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+          </div>
+        </div>
+      </div>
+      </div>
     </div>
-  </div>
-  <div class="group col-md-4">
-    <h3>Section 2</h3>
-    <div>
-      <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna. </p>
-    </div>
-  </div>
-  <div class="group col-md-4">
-    <h3>Section 3</h3>
-    <div>
-      <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
-      <ul>
-        <li>List item one</li>
-        <li>List item two</li>
-        <li>List item three</li>
-      </ul>
-    </div>
-  </div>
-  <div class="group col-md-4">
-    <h3>Section 4</h3>
-    <div>
-      <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-    </div>
-  </div>
-  <div class="group col-md-4">
-    <h3>Section 5</h3>
-    <div>
-      <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-    </div>
-  </div>
-  <div class="group col-md-4">
-    <h3>Section 6</h3>
-    <div>
-      <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-    </div>
-  </div>
-  <div class="group col-md-4">
-    <h3>Section 7</h3>
-    <div>
-      <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-    </div>
-  </div>
-  <div class="group col-md-4">
-    <h3>Section 8</h3>
-    <div>
-      <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-    </div>
-  </div>
-  <div class="group col-md-4">
-    <h3>Section 9</h3>
-    <div>
-      <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-    </div>
-  </div>
-  <div class="group col-md-4">
-    <h3>Section 10</h3>
-    <div>
-      <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-    </div>
-  </div>
-  <div class="group col-md-4">
-    <h3>Section 11</h3>
-    <div>
-      <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-    </div>
-  </div>
-</div>
-</div>
- 
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-</body>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/popper.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/widgets-set.js' %}"></script>
+    </script>
+  </body>
 </html>

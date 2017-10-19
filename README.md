@@ -5,32 +5,12 @@ This is a site prsent Taiwan Earthquake Information. You can see different kind 
 All of Python package you need are in requirement.txt
 
 
-啟動 Worker 時，記得 Broker要先啟動，
-
-也就是要先 Start RabbitMQ，然後再啟動 Celery Worker，有定時任務再開啟 Celery beat
-
-
-順序如下
-
-<<<<<<< HEAD
-```Bash
-$celery -A ear_control_site -l INFO worker
-$celery -A ear_control_site -l INFO beat
-$celery flower -A ear_control_site --address=127.0.0.1 --port=5555
-```
-	
-	=> 開啟worker
-	=> 開啟beat
-	=> 開啟RabbitMQ
-
-
-
 ## Celery beat 設定
 
 Worker(RabbitMQ) 會執行在earth_control_site/celery.py中的task
 當設定Celery定時任務時
 
-先設定
+### 先設定
 
 當 Celery 設定完定時任務內容時 (ear_control_site/earth_control_site/celery.py), (ear_control_site/crawler/task.py)
 記得將task註冊在 app.conf.update(CELERYBEAT_SCHEDULE) 中
@@ -57,12 +37,28 @@ earth_control_site/celery.py
 
 	...
 ```
-=======
-	=> 開啟RabbitMQ
 
-	開啟celery
-	celery -A earth_control_site worker -l info
+
+### 啟動方式
+
+啟動 Worker 時，記得 Broker要先啟動，
+
+步驟如下
+
+1. Start RabbitMQ
+2. 啟動 Celery Worker
+3. 有定時任務再開啟 Celery beat
+4. 有flower介面監控worker再開啟flower
+
+順序如下
+
+```Bash
+$celery -A ear_control_site -l INFO worker
+$celery -A ear_control_site -l INFO beat
+$celery flower -A ear_control_site --address=127.0.0.1 --port=5555
+```
 	
-	開啟監控
-	celery flower -A earth_control_site --address=127.0.0.1 --port=5555
-
+	=> 開啟RabbitMQ
+	=> 開啟worker
+	=> 開啟beat
+	=> 開啟flower監控worker

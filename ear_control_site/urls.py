@@ -27,5 +27,7 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^ear_data/$', views.show_earthquake_in_table,name='show_earthquake_in_table'),
     url(r'^earthquakes/$', views.EarthquakeList),
-    url(r'^widges/$', views.WidgeList),
+    url(r'^widgets/$', views.WidgeList),
+    url(r'^ear_map/$', views.ShowMap),
+    
 ]
