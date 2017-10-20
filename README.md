@@ -32,7 +32,7 @@ Django Framework:
 	from app_name import views
 ```
 
-####對應範例: 
+#### 對應範例: 
 our_domain => localhost or 127.0.0.1
 django_project/project_name/url.py => ear_control_site/ear_control_site/url.py
 views.def_name => views.EarthquakeList
@@ -51,10 +51,12 @@ ear_control_site/ear_control_site/url.py
 	...
 ```
 
-#### 
+### view.py 做了什麼?
 
 接下來看看 views.py 裡面做了什麼
 ear_control_site/ear_info/views.py
+
+#### 對應範例
 
 ## Celery beat 設定
 
