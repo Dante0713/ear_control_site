@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'css/widgets-set.css' %}"/>
     <title>jQuery UI Accordion - Sortable</title>
   </head>
@@ -13,10 +13,18 @@
     <p class="accordion-expand-holder">
       <a class="accordion-expand-all" href="#">Expand all</a>
     </p>
+    <div class="search_widget">
+      <form method="get" aciton="{% url 'get_earthquake_data' %}"  style="text-align: center;">
+        <label for="searching">欲顯示資料之條件</label>
+        {% csrf_token %}
+        <input type="search" placeholder="搜索" required></input>
+        <button type="submit">搜索</button>
+      </form>
+    </div>
     <div id="accordion" class="ui-accordion ui-widget ui-helper-reset container">
       <div class="row">
-      <div id="col_left" class="col-md-4">
-        <div class="widget">
+      <div id="col_left" class="col">
+        <div class="widget" name='scale_chart'>
           <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
             <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
             Section 1-1
@@ -59,7 +67,7 @@
           </div>
         </div>
       </div>
-      <div id="col_middle"  class="col-md-4">
+      <div id="col_middle"  class="col">
         <div class="widget">
           <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
             <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
@@ -103,7 +111,7 @@
           </div>
         </div>
       </div>
-      <div id="col_right"  class="col-md-4">
+      <div id="col_right"  class="col">
         <div class="widget">
           <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
             <span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
@@ -151,6 +159,7 @@
     </div>
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/jquery.ui.touch-punch.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/popper.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/widgets-set.js' %}"></script>

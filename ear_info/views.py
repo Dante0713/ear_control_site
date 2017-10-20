@@ -18,7 +18,7 @@ def EarthquakeList(request):
 	return HttpResponse(html)
 
 def WidgeList(request):
-	template = get_template('widge_page.html')
+	template = get_template('widget_page.html')
 	now = datetime.now
 	html = template.render(locals())
 	return HttpResponse(html)
@@ -34,7 +34,7 @@ class EarthquakeViewSet(viewsets.ModelViewSet):
 	serializer_class = EarthquakeSerializer
 	permission_classes = (IsAuthenticated,)
 
-def show_earthquake_in_table(request):
+def get_earthquake_data(request):
 	'''
 	专门处理在服务器资产列表里面的表格信息的方法
 	:param request: 
@@ -49,31 +49,31 @@ def show_earthquake_in_table(request):
 		order = request.GET.get('order')	  # ascending or descending
 		if search:	#	判断是否有搜索字 id=search,ear_id=search,s_year=search,ear_time=search,ear_longitude=search,ear_latitude=search,ear_scale=search,ear_deep=search,ear_epicenter_pos=search
 			if '=' in search:
-				if '編號=' in search:
+				if '編號=' or 'id=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(id__contains=search1))
-				elif '地震編號=' in search:
+				elif '地震編號=' or 'ear_id=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_id__contains=search1))
-				elif '年份=' in search:
+				elif '年份=' or 's_year=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(s_year__contains=search1))
-				elif '台灣時間=' in search:
+				elif '台灣時間=' or 'ear_time=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_time__contains=search1))
-				elif '經度=' in search:
+				elif '經度=' or 'ear_lg=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_longitude__contains=search1))
-				elif '緯度=' in search:
+				elif '緯度=' or 'ear_lt=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_latitude__contains=search1))
-				elif '規模=' in search:
+				elif '規模=' or 'ear_scale=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_scale__contains=search1))
-				elif '深度=' in search:
+				elif '深度=' or 'ear_deep=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_deep__contains=search1))
-				elif '震央位置=' in search:
+				elif '震央位置=' or 'ear_pos=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_epicenter_pos__contains=search1))
 				else:
@@ -133,3 +133,5 @@ def show_earthquake_in_table(request):
 				"earthquake_ear_epicenter_pos":earthquake.ear_epicenter_pos if earthquake.ear_epicenter_pos else "",
 			})
 	return  HttpResponse(json.dumps(response_data), content_type="application/json")
+
+	
