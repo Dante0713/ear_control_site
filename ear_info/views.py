@@ -24,7 +24,7 @@ def WidgeList(request):
 	return HttpResponse(html)
 
 def ShowMap(request):
-	template = get_template('show_map.html')
+	template = get_template('test.html')
 	html = template.render(locals())
 	return HttpResponse(html)
 
@@ -32,7 +32,7 @@ def ShowMap(request):
 class EarthquakeViewSet(viewsets.ModelViewSet):
 	queryset = Earthquake.objects.all()
 	serializer_class = EarthquakeSerializer
-	permission_classes = (IsAuthenticated,)
+	
 
 def get_earthquake_data(request):
 	'''

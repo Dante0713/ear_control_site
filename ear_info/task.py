@@ -87,6 +87,7 @@ def store_data(cursor, driver, current_max_id, last_time, base_year = 1995, base
 				changing_pages_on_fetch_site(driver, s_year, s_month)
 				current_max_id = initial_store_data(cursor, driver.find_element_by_id('ctl03_gvEarthquake').find_elements_by_tag_name('tr'), current_max_id, s_year, s_month) 
 	driver.close()
+	driver.quit()
 
 def initial_store_data(cursor, dataset, current_max_id, s_year, s_month):
 	data = list()

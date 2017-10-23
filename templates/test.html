@@ -1,7 +1,18 @@
-<div id="sitebody">
-　<div id="header">header</div>
-　<div id="sidebar_left">sidebar_left</div>
-　<div id="sidebar_right">sidebar_right</div>
-　<div id="content">content</div>
-　<div id="footer">footer</div>
-</div>
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>test</title>
+	</head>
+	<body>
+		<div id='app'>
+			<input id="search_box" type="text" v-model="search_word" v-on:keyup.enter="submit">
+			[[search_word]]
+		</div>
+		
+
+		<script src="https://cdn.bootcss.com/vue/2.1.0/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.0/axios.js"></script>
+		<script src="{% static 'js/chart-examples.js' %}" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
