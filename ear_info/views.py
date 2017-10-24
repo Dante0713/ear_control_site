@@ -96,8 +96,6 @@ def get_earthquake_data(request):
 														Q(ear_scale__contains=search) |
 														Q(ear_deep__contains=search) |
 														Q(ear_epicenter_pos__contains=search))
-			
-
 		else:
 			all_records = Earthquake.objects.all()   # must be wirte the line code here
 		
@@ -112,8 +110,26 @@ def get_earthquake_data(request):
 
 		if not offset:
 			offset = 0
+
+		if limit == "-1":
+			response_data = {'total':all_records_count,'rows':[]}
+			for earthquake in all_records:
+				response_data['rows'].append({
+					"earthquake_id": earthquake.id if earthquake.id else "",
+					"earthquake_ear_id" : earthquake.ear_id if earthquake.ear_id else "",
+					"earthquake_s_year": earthquake.s_year if earthquake.s_year else "",
+					"earthquake_ear_time": earthquake.ear_time if earthquake.ear_time else "",
+					"earthquake_ear_longitude": earthquake.ear_longitude if earthquake.ear_longitude else "",
+					"earthquake_ear_latitude": earthquake.ear_latitude if earthquake.ear_latitude else "",
+					"earthquake_ear_scale": earthquake.ear_scale if earthquake.ear_scale else "",
+					"earthquake_ear_deep": earthquake.ear_deep if earthquake.ear_deep else "",
+					"earthquake_ear_epicenter_pos":earthquake.ear_epicenter_pos if earthquake.ear_epicenter_pos else "",
+				})
+			return  HttpResponse(json.dumps(response_data), content_type="application/json")
+
 		if not limit:
 			limit = 10	# 默认是每页20行的内容，与前端默认行数一致
+
 		pageinator = Paginator(all_records, limit)   # 开始做分页
 
 		page = int(int(offset) / int(limit) + 1)	
