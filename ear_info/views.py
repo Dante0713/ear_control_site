@@ -49,31 +49,31 @@ def get_earthquake_data(request):
 		order = request.GET.get('order')	  # ascending or descending
 		if search:	#	判断是否有搜索字 id=search,ear_id=search,s_year=search,ear_time=search,ear_longitude=search,ear_latitude=search,ear_scale=search,ear_deep=search,ear_epicenter_pos=search
 			if '=' in search:
-				if '編號=' or 'id=' in search:
+				if '編號=' in search or 'id=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(id__contains=search1))
-				elif '地震編號=' or 'ear_id=' in search:
+				elif '地震編號=' in search or 'ear_id=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_id__contains=search1))
-				elif '年份=' or 's_year=' in search:
+				elif '年份=' in search or 's_year=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(s_year__contains=search1))
-				elif '台灣時間=' or 'ear_time=' in search:
+				elif '台灣時間=' in search or 'ear_time=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_time__contains=search1))
-				elif '經度=' or 'ear_lg=' in search:
+				elif '經度=' in search or 'ear_lg=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_longitude__contains=search1))
-				elif '緯度=' or 'ear_lt=' in search:
+				elif '緯度=' in search or 'ear_lt=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_latitude__contains=search1))
-				elif '規模=' or 'ear_scale=' in search:
+				elif '規模=' in search or 'ear_scale=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_scale__contains=search1))
-				elif '深度=' or 'ear_deep=' in search:
+				elif '深度=' in search or 'ear_deep=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_deep__contains=search1))
-				elif '震央位置=' or 'ear_pos=' in search:
+				elif '震央位置=' in search or 'ear_pos=' in search:
 					search1=search.split('=')[1]
 					all_records = Earthquake.objects.filter(Q(ear_epicenter_pos__contains=search1))
 				else:
@@ -87,6 +87,7 @@ def get_earthquake_data(request):
 														Q(ear_deep__contains=search) |
 														Q(ear_epicenter_pos__contains=search))
 			else:
+				print('= not it')
 				all_records = Earthquake.objects.filter(Q(id__contains=search) | 
 														Q(ear_id__contains=search) | 
 														Q(s_year__contains=search) |
@@ -115,14 +116,14 @@ def get_earthquake_data(request):
 			response_data = {'total':all_records_count,'rows':[]}
 			for earthquake in all_records:
 				response_data['rows'].append({
-					"earthquake_id": earthquake.id if earthquake.id else "",
+					"earthquake_id": int(earthquake.id) if int(earthquake.id) else "",
 					"earthquake_ear_id" : earthquake.ear_id if earthquake.ear_id else "",
-					"earthquake_s_year": earthquake.s_year if earthquake.s_year else "",
+					"earthquake_s_year": int(earthquake.s_year) if int(earthquake.s_year) else "",
 					"earthquake_ear_time": earthquake.ear_time if earthquake.ear_time else "",
-					"earthquake_ear_longitude": earthquake.ear_longitude if earthquake.ear_longitude else "",
-					"earthquake_ear_latitude": earthquake.ear_latitude if earthquake.ear_latitude else "",
-					"earthquake_ear_scale": earthquake.ear_scale if earthquake.ear_scale else "",
-					"earthquake_ear_deep": earthquake.ear_deep if earthquake.ear_deep else "",
+					"earthquake_ear_longitude": float(earthquake.ear_longitude) if float(earthquake.ear_longitude) else "",
+					"earthquake_ear_latitude": float(earthquake.ear_latitude) if float(earthquake.ear_latitude) else "",
+					"earthquake_ear_scale": float(earthquake.ear_scale) if float(earthquake.ear_scale) else "",
+					"earthquake_ear_deep": float(earthquake.ear_deep) if float(earthquake.ear_deep) else "",
 					"earthquake_ear_epicenter_pos":earthquake.ear_epicenter_pos if earthquake.ear_epicenter_pos else "",
 				})
 			return  HttpResponse(json.dumps(response_data), content_type="application/json")
