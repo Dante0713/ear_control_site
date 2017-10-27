@@ -24,15 +24,25 @@ def WidgeList(request):
 	return HttpResponse(html)
 
 def ShowMap(request):
-	template = get_template('test.html')
+	template = get_template('show_map.html')
 	html = template.render(locals())
 	return HttpResponse(html)
+
+def get_chart_data(request):
+	taiwan_list = ['台北', '花蓮', '嘉義', '台南', '宜蘭', '台東', '屏東', '高雄', '南投', '彰化', '台中', '基隆', '斗六', '苗栗', '新竹', '桃園', '雲林', '金門', '澎湖', '馬祖', '新北', '連江', '臺東', '臺北', '臺南', '臺中']
+	response_data,pie_data,short_pie_data = {},{},{}
+	if request.method == "GET":
+		response_data['scale_data']= {'label':['%s-%s'%(i,i+2) for i in range(0,10,2)],'data':[Earthquake.objects.filter(Q(ear_scale__range=(i,(i+2)))).count() for i in range(0,10,2)]}
+		pie_data = {Earthquake.objects.filter(Q(ear_epicenter_pos__contains=i)).count():i for i in taiwan_list}
+		short_pie_data = { sorted(pie_data)[i]:pie_data[sorted(pie_data)[i]] for i in range(len(sorted(pie_data))-1,len(sorted(pie_data))-5,-1)}
+		response_data['pie_data'] = {'label':list(short_pie_data.values()), 'data':list(short_pie_data.keys())}
+		response_data['pie_data']['label'].append('其他')
+		response_data['pie_data']['data'].append(sum([sorted(pie_data)[i] for i in range(0, len(sorted(pie_data))-6)]))
 
 # Create your views here.
 class EarthquakeViewSet(viewsets.ModelViewSet):
 	queryset = Earthquake.objects.all()
 	serializer_class = EarthquakeSerializer
-	
 
 def get_earthquake_data(request):
 	'''

@@ -1,29 +1,22 @@
-{% load static %}
-<!DOCTYPE HTML>
+{%load static%}
+<!doctype html>
 <html>
-  <head>
-    <title>test</title>
-    <!--[if IE]><script type="text/javascript" src="../excanvas.js"></script><![endif]-->
-    <link rel='shortcut icon' type='image/x-icon' href="{% static 'css/images/favicon-20171024111016662.ico' %}" />
-  </head>
-  <body>
+        <head>
+                <title>Line Chart</title>
+                 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+                <script src="{%static 'js/excanvas.js'%}"></script>
+                <script src="{%static 'js/Chart.min.js'%}"></script>
+                <script type="text/javascript" src="{%static 'js/chart-examples.js'%}"></script>
+
+        
+                <meta name = "viewport" content = "initial-scale = 1, user-scalable = no">
+        </head>
+        <body onload="load()">
+                <canvas id="canvas2" height="450" width="600"></canvas>
 
 
-         <input type="text" id="inputTarget">
-         <div id="data"></div>
-
-
-
-
-
-
-
-
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-    <script src="http://builds.emberjs.com/release/ember-template-compiler.js"></script>
-    <script src="{% static 'js/chart-examples.js' %}" type="text/javascript" charset="utf-8"></script>
-  
-  <!--<script src="https://cdn.bootcss.com/vue/2.1.0/vue.js" type="text/javascript" charset="utf-8"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.0/axios.js"></script>-->
-  </body>
+        
+        
+      
+        </body>
 </html>

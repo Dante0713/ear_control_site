@@ -1,19 +1,48 @@
-body {font: 12px verdana; text-align: center; background: #e3e7ed;}
-#container {width: 1024px; margin: auto; text-align: left;}
-#pageTitle {font-size: 20px; text-align: center}
-#userName {font-size: 15px; text-align: right;}
-#searchArea {text-align: center;padding: 10px}
-#searchCount {font-size: 14px;margin-top:10px;margin-bottom: 0px;}
-#group1 {width: 300px; height: 500px;margin-left: 32px; padding: 10px; float: left}
-#group2 {width: 300px; height: 500px; padding: 10px; float: left}
-#group3 {width: 300px; height: 500px; padding: 10px; float: left}
-.drag {border: 2px solid #e57f12; background-color: white; margin: 10px;border-radius:10px;}
-.dragTitle {width: 300px; height: 20px; background-color: #e57f12; cursor: move; font-weight: bold;border-top-right-radius:5px;border-top-left-radius:5px;color: white;} 
-.draging {position: absolute; border: 1px solid black; background-color: white; cursor: move; filter:alpha(opacity=70); opacity: 0.7;border-top-right-radius:6.2px;border-top-left-radius:6.2px;}
-.dBack {background-color: white; border: 2px dashed black; margin: 10px; filter:alpha(opacity=30); opacity: 0.3;}
-#d1 {width: 300px; height: 120px}
-#d2 {width: 300px; height: 220px}
-#d3 {width: 300px; height: 520px}
-#d4 {width: 300px; height: 320px}
-#d5 {width: 300px; height: 220px}
-#d6 {width: 300px; height: 120px}
+@import url(https://fonts.googleapis.com/css?family=Exo+2:400,900);
+body{
+  background: #eceff1;
+}
+#bodyTitle{
+  margin-top: 25px;
+  padding-left: calc((100% - 224px)/2);
+  padding-right: calc((100% - 224px)/2);
+}
+.widget{
+  padding: 10px;
+  padding-left: calc((100% - 250px)/2);
+  padding-right: calc((100% - 250px)/2);
+}
+
+
+.accordion-header, .ui-accordion-content {
+  width: 250px;
+}
+
+#IEcanvas{
+  top:0px;left:-30px;
+}
+
+@media (min-width: 1024px){
+  .container {
+    width: 1000px;
+  }
+  .accordion-header, .ui-accordion-content {
+    width: 280px;
+  }
+  .widget{
+    padding: 10px;
+    border-left: 10px;
+    padding-left: 15%;
+  }
+}
+
+@media (min-width: 1300px){
+  .container {
+    width: 1280px;
+  }
+  .accordion-header, .ui-accordion-content {
+  width: 300px;
+  }
+}
+
+

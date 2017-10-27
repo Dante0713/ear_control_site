@@ -26,7 +26,8 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^ear_data/$', views.get_earthquake_data,name='get_earthquake_data'),
+    url(r'^ear_chart/$', views.get_chart_data,name='get_chart_data'),
     url(r'^earthquakes/$', views.EarthquakeList),
-    url(r'^widgets/$', views.WidgeList),
+    url(r'^ear_widgets/$', views.WidgeList),
     url(r'^ear_map/$', views.ShowMap),
 ]

@@ -86,23 +86,31 @@ def store_data(cursor, driver, current_max_id, last_time, base_year = 1995, base
 				changing_pages_on_fetch_site(driver, s_year, s_month)
 				current_max_id = initial_store_data(cursor, driver.find_element_by_id('ctl03_gvEarthquake').find_elements_by_tag_name('tr'), current_max_id, s_year, s_month) 
 	driver.close()
+	driver.quit()
 
 def initial_store_data(cursor, dataset, current_max_id, s_year, s_month):
 	data = list()
 	fetch_data = list()
+	float_data = list()
 	tmp_list = list()
 	for index in range(1,len(dataset)):
 		if "(" in dataset[index].text:
 			current_max_id += 1
-			tmp_list.extend([str(current_max_id),str(s_year),str(s_month)])
-			tmp_list.extend(dataset[index].text.split()[:-4])
+			fetch_data = dataset[index].text.split()[:-4]
+			fetch_data, float_data = fetch_data[:-4], [float(i) for i in fetch_data[-4:]]
+			tmp_list.extend([int(current_max_id),int(s_year),int(s_month)])
+			tmp_list.extend(fetch_data)
+			tmp_list.extend(float_data)
 			tmp_list.append("".join(dataset[index].text.split()[-4:]))
 			data.append(tuple(tmp_list))
 			tmp_list = list()
 		else:
 			current_max_id += 1
-			tmp_list.extend([str(current_max_id),str(s_year),str(s_month)])
-			tmp_list.extend(dataset[index].text.split()[:-3])
+			fetch_data = dataset[index].text.split()[:-3]
+			fetch_data, float_data = fetch_data[:-3], [float(i) for i in fetch_data[-3:]]
+			tmp_list.extend([int(current_max_id),int(s_year),int(s_month)])
+			tmp_list.extend(fetch_data)
+			tmp_list.extend(float_data)
 			tmp_list.append("".join(dataset[index].text.split()[-3:]))
 			data.append(tuple(tmp_list))
 			tmp_list = list()
@@ -112,6 +120,8 @@ def initial_store_data(cursor, dataset, current_max_id, s_year, s_month):
 
 def normal_store_data(cursor, dataset, current_max_id, last_time, s_year, s_month):
 	data = list()
+	fetch_data = list()
+	float_data = list()
 	tmp_list = list()
 	for fetch_data_index in range((len(dataset)-1),1,-1 ):
 		webdata= dataset[fetch_data_index].text.split()[1]
@@ -122,16 +132,22 @@ def normal_store_data(cursor, dataset, current_max_id, last_time, s_year, s_mont
 				for store_index in range((fetch_data_index+1),len(dataset)):
 					if "(" in dataset[store_index].text:
 						current_max_id += 1
-						tmp_list.extend([str(current_max_id),str(s_year),str(s_month)])
-						tmp_list.extend(dataset[store_index].text.split()[:-4])
-						tmp_list.append("".join(dataset[store_index].text.split()[-4:]))
+						fetch_data = dataset[index].text.split()[:-4]
+						fetch_data, float_data = fetch_data[:-4], [float(i) for i in fetch_data[-4:]]
+						tmp_list.extend([int(current_max_id),int(s_year),int(s_month)])
+						tmp_list.extend(fetch_data)
+						tmp_list.extend(float_data)
+						tmp_list.append("".join(dataset[index].text.split()[-4:]))
 						data.append(tuple(tmp_list))
 						tmp_list = list()
 					else:
 						current_max_id += 1
-						tmp_list.extend([str(current_max_id),str(s_year),str(s_month)])
-						tmp_list.extend(dataset[store_index].text.split()[:-3])
-						tmp_list.append("".join(dataset[store_index].text.split()[-3:]))
+						fetch_data = dataset[index].text.split()[:-3]
+						fetch_data, float_data = fetch_data[:-3], [float(i) for i in fetch_data[-3:]]
+						tmp_list.extend([int(current_max_id),int(s_year),int(s_month)])
+						tmp_list.extend(fetch_data)
+						tmp_list.extend(float_data)
+						tmp_list.append("".join(dataset[index].text.split()[-3:]))
 						data.append(tuple(tmp_list))
 						tmp_list = list()
 				cursor.executemany('INSERT INTO ear_info VALUES (?,?,?,?,?,?,?,?,?,?)',data)
