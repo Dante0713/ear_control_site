@@ -1,4 +1,3 @@
-# all task is running in earth_control_site/celery.py
 import sqlite3
 import datetime
 from selenium import webdriver
@@ -106,9 +105,10 @@ def initial_store_data(cursor, dataset, current_max_id, s_year, s_month, conn):
 		if "(" in dataset[index].text:
 			current_max_id += 1
 			fetch_data = dataset[index].text.split()[:-4]
-			fetch_data, float_data = fetch_data[:-4], [float(i) for i in fetch_data[-4:]]
+			fetch_data, float_data = fetch_data[:-5], [float(i) for i in fetch_data[-5:]] # fetch data - [], float type data -[ear_longitude, ear_latitude, ear_deep, ear_scale]
 			tmp_list.extend([int(current_max_id),int(s_year),int(s_month)])
 			tmp_list.extend(fetch_data)
+			tmp_list.append(time_DT(s_year, s_month, fetch_data[-1]))
 			tmp_list.extend(float_data)
 			tmp_list.append("".join(dataset[index].text.split()[-4:]))
 			data.append(tuple(tmp_list))
@@ -116,14 +116,15 @@ def initial_store_data(cursor, dataset, current_max_id, s_year, s_month, conn):
 		else:
 			current_max_id += 1
 			fetch_data = dataset[index].text.split()[:-3]
-			fetch_data, float_data = fetch_data[:-3], [float(i) for i in fetch_data[-3:]]
+			fetch_data, float_data = fetch_data[:-4], [float(i) for i in fetch_data[-4:]]
 			tmp_list.extend([int(current_max_id),int(s_year),int(s_month)])
 			tmp_list.extend(fetch_data)
+			tmp_list.append(time_DT(s_year, s_month, fetch_data[-1]))
 			tmp_list.extend(float_data)
 			tmp_list.append("".join(dataset[index].text.split()[-3:]))
 			data.append(tuple(tmp_list))
 			tmp_list = list()
-	cursor.executemany('INSERT INTO ear_info VALUES (?,?,?,?,?,?,?,?,?,?)',data)
+	cursor.executemany('INSERT INTO ear_info VALUES (?,?,?,?,?,?,?,?,?,?,?)',data)
 	conn.commit()
 	return current_max_id
 
@@ -138,13 +139,14 @@ def normal_store_data(cursor, dataset, current_max_id, last_time, s_year, s_mont
 			if fetch_data_index == (len(dataset)-1):
 				pass
 			else:
-				for store_index in range((fetch_data_index+1),len(dataset)):
-					if "(" in dataset[store_index].text:
+				for index in range((fetch_data_index+1),len(dataset)):
+					if "(" in dataset[index].text:
 						current_max_id += 1
 						fetch_data = dataset[index].text.split()[:-4]
-						fetch_data, float_data = fetch_data[:-4], [float(i) for i in fetch_data[-4:]]
+						fetch_data, float_data = fetch_data[:-5], [float(i) for i in fetch_data[-5:]] # fetch data - [], float type data -[ear_longitude, ear_latitude, ear_deep, ear_scale]
 						tmp_list.extend([int(current_max_id),int(s_year),int(s_month)])
 						tmp_list.extend(fetch_data)
+						tmp_list.append(time_DT(s_year, s_month, fetch_data[-1]))
 						tmp_list.extend(float_data)
 						tmp_list.append("".join(dataset[index].text.split()[-4:]))
 						data.append(tuple(tmp_list))
@@ -152,19 +154,23 @@ def normal_store_data(cursor, dataset, current_max_id, last_time, s_year, s_mont
 					else:
 						current_max_id += 1
 						fetch_data = dataset[index].text.split()[:-3]
-						fetch_data, float_data = fetch_data[:-3], [float(i) for i in fetch_data[-3:]]
+						fetch_data, float_data = fetch_data[:-4], [float(i) for i in fetch_data[-4:]]
 						tmp_list.extend([int(current_max_id),int(s_year),int(s_month)])
 						tmp_list.extend(fetch_data)
+						tmp_list.append(time_DT(s_year, s_month, fetch_data[-1]))
 						tmp_list.extend(float_data)
 						tmp_list.append("".join(dataset[index].text.split()[-3:]))
 						data.append(tuple(tmp_list))
 						tmp_list = list()
-				cursor.executemany('INSERT INTO ear_info VALUES (?,?,?,?,?,?,?,?,?,?)',data)
+				cursor.executemany('INSERT INTO ear_info VALUES (?,?,?,?,?,?,?,?,?,?,?)',data)
 				conn.commit()
 				return current_max_id
 		else:
 			pass
 	return current_max_id
+
+def time_DT(s_year, s_month, ear_time_str):
+	return str(s_year) + '-' +('0'+ str(s_month) if len(str(s_month)) == 1 else str(s_month)) + '-' + ear_time_str[-9:-7 ] + ' ' + ear_time_str[-6:-4] + ':' + ear_time_str[-3:-1] + ':00.000'
 
 def changing_pages_on_fetch_site(driver, s_year, s_month):
 	# waiting for site loading

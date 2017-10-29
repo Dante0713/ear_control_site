@@ -5,9 +5,8 @@ from django.template.loader import get_template
 from datetime import datetime
 from ear_info.models import Earthquake
 from ear_info.serializers import EarthquakeSerializer
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 import json
 
@@ -50,6 +49,8 @@ def get_earthquake_data(request):
 	:param request: 
 	:return: 
 	'''
+	id_search = ''
+	tw2eng = {'編號':['id',Q(id__contains=id_search)],'地震編號':'ear_id','年份':'s_year','台灣時間':'ear_time','經度':'ear_longitude','緯度':'ear_latitude','規模':'ear_scale','深度':'ear_deep','震央位置':'ear_epicenter_pos'}
 	if request.method == "GET":
 		print(request.GET)
 		limit = request.GET.get('limit')   # how many items per page
@@ -57,7 +58,9 @@ def get_earthquake_data(request):
 		search = request.GET.get('search')
 		sort_column = request.GET.get('sort')   # which column need to sort
 		order = request.GET.get('order')	  # ascending or descending
-		if search:	#	判断是否有搜索字 id=search,ear_id=search,s_year=search,ear_time=search,ear_longitude=search,ear_latitude=search,ear_scale=search,ear_deep=search,ear_epicenter_pos=search
+		if search:
+			if '&' in search:
+				pass
 			if '=' in search:
 				if '編號=' in search or 'id=' in search:
 					search1=search.split('=')[1]
@@ -112,11 +115,14 @@ def get_earthquake_data(request):
 		
 		if sort_column:   # 判断是否有排序需求
 			sort_column = sort_column.replace('earthquake_', '')	
-			if sort_column in ['id','ear_id','s_year','ear_time','ear_longitude','ear_latitude','ear_scale','ear_deep','ear_epicenter_pos']:   # 如果排序的列表在这些内容里面
+			if sort_column in ['id','ear_id','s_year','ear_longitude','ear_latitude','ear_scale','ear_deep','ear_epicenter_pos']:   # 如果排序的列表在这些内容里面
 				if order == 'desc':   # 如果排序是反向
 					sort_column = '-%s' % (sort_column)
 				all_records = all_records.order_by(sort_column)
-
+			elif sort_column == 'ear_time':
+				if order == 'desc':
+					sort_column = '-%s' % (DT_ear_time)
+				all_records = all_records.order_by(sort_column)
 		all_records_count=all_records.count()
 
 		if not offset:
