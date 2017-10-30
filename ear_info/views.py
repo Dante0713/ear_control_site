@@ -59,8 +59,6 @@ def get_earthquake_data(request):
 		sort_column = request.GET.get('sort')   # which column need to sort
 		order = request.GET.get('order')	  # ascending or descending
 		if search:
-			if '&' in search:
-				pass
 			if '=' in search:
 				if '編號=' in search or 'id=' in search:
 					search1=search.split('=')[1]
@@ -121,7 +119,7 @@ def get_earthquake_data(request):
 				all_records = all_records.order_by(sort_column)
 			elif sort_column == 'ear_time':
 				if order == 'desc':
-					sort_column = '-%s' % (DT_ear_time)
+					sort_column = '-%s' % ('DT_ear_time')
 				all_records = all_records.order_by(sort_column)
 		all_records_count=all_records.count()
 

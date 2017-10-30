@@ -1,47 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>地震資訊地圖</title>
     <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
       #map {
-        height: 800px;
-        width: 100%;
-       }
-    </style>
-    <title> Google Maps </title>
-  </head>
-  <body>
-    <h3>Google Maps Demo</h3>
-    <div id="map"></div>
-    <script>
-      function initMap() {
-        var NanTo = {lat: 23.96, lng: 121.09};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 8,
-          center: NanTo
-        });
-
-        var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h3 id="firstHeading" class="firstHeading">花蓮</h3>'+
-      '<div id="bodyContent">'+
-      '<p><b>花蓮</b></p>'+
-      '</div>'+
-      '</div>';
-		var infowindow = new google.maps.InfoWindow({
-			content: contentString
-        });	
-        var marker = new google.maps.Marker({
-          position: {lat: 23.84, lng: 121.45},
-          map: map
-        });
-		marker.addListener('click', function() {
-			infowindow.open(map, marker);
-        });
+        height: 80%;
       }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkidRUw2dtUavw9aY_Vslle_Qqjgmxj_k&callback=initMap"
-    async defer></script>
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body onload="load();">
+    <h2>地震資訊地圖</h2>
+    <input id="inputTarget" type="text"></input>
+    <p id='searchCount'></p>
+    
+    <div id="map"></div>
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/popper.js' %}"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkidRUw2dtUavw9aY_Vslle_Qqjgmxj_k&callback=initMap"></script>
   </body>
 </html>

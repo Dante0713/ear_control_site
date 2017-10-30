@@ -106,7 +106,7 @@ def initial_store_data(cursor, dataset, current_max_id, s_year, s_month, conn):
 		if "(" in dataset[index].text:
 			current_max_id += 1
 			fetch_data = dataset[index].text.split()[:-4]
-			fetch_data, float_data = fetch_data[:-5], [float(i) for i in fetch_data[-5:]] # fetch data - [], float type data -[ear_longitude, ear_latitude, ear_deep, ear_scale]
+			fetch_data, float_data = fetch_data[:-4], [float(i) for i in fetch_data[-4:]] # fetch data - [], float type data -[ear_longitude, ear_latitude, ear_deep, ear_scale]
 			tmp_list.extend([int(current_max_id),int(s_year),int(s_month)])
 			tmp_list.extend(fetch_data)
 			tmp_list.append(time_DT(s_year, s_month, fetch_data[-1]))
@@ -144,7 +144,7 @@ def normal_store_data(cursor, dataset, current_max_id, last_time, s_year, s_mont
 					if "(" in dataset[index].text:
 						current_max_id += 1
 						fetch_data = dataset[index].text.split()[:-4]
-						fetch_data, float_data = fetch_data[:-5], [float(i) for i in fetch_data[-5:]] # fetch data - [], float type data -[ear_longitude, ear_latitude, ear_deep, ear_scale]
+						fetch_data, float_data = fetch_data[:-4], [float(i) for i in fetch_data[-4:]] # fetch data - [], float type data -[ear_longitude, ear_latitude, ear_deep, ear_scale]
 						tmp_list.extend([int(current_max_id),int(s_year),int(s_month)])
 						tmp_list.extend(fetch_data)
 						tmp_list.append(time_DT(s_year, s_month, fetch_data[-1]))

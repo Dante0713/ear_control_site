@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'ear_info',
     'grappelli',
+    'users',
 ]
+
+AUTH_USER_MODEL = 'users.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,3 +132,12 @@ STATICFILES_DIRS=(
     os.path.join(BASE_DIR, "static"),
 )
 
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'coolwu34@gmail.com'
+EMAIL_HOST_PASSWORD = 'postboy09'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

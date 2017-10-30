@@ -8,6 +8,7 @@ class Earthquake(models.Model):
     s_year = models.IntegerField()
     s_month = models.IntegerField()
     ear_time = models.TextField()
+    DT_ear_time = models.TextField(default= '', null=True, blank=True)
     ear_longitude = models.FloatField()
     ear_latitude = models.FloatField()
     ear_scale = models.FloatField()
@@ -16,3 +17,4 @@ class Earthquake(models.Model):
 
     class Meta:
         db_table = "ear_info"
+        
